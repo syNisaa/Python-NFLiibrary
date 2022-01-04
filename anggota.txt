@@ -1,0 +1,9 @@
+LIB829,Black Panther,1
+LIB225,Ran Mouri,2
+LIB131,Naruto,1
+LIB968,Maudy Ayunda,2
+LIB927,Iron Man,1
+
+LNF206,Anisa,2
+LNF465,Anisa,1
+LNF869,Indrie,2
