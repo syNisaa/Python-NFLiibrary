@@ -2,9 +2,13 @@ import random, string
 
 print("Selamat Datang Di NF Library")   
 
+def menu():
+    print("Silahkan Pilih Menu : \n [1] Tambah Anggota Baru \n [2] Tambah Buku Baru \n [3] Pinjam Buku \n [4] Kembalikan Buku \n [5] Lihat data Anggota \n [6] Lihat Data Pinjaman [7] Keluar")
+    
+
 
 while True:
-    print("Silahkan Pilih Menu : \n [1] Tambah Anggota Baru \n [2] Tambah Buku Baru \n [3] Pinjam Buku \n [4] Kembalikan Buku \n [5] Lihat data Anggota \n [6] Lihat Data Pinjaman [7] Keluar")
+    menu()
     pilihan = input("Masukan Menu Pilihan Anda : ")
 
     # Fitur 1 : Pendaftaran Anggota
@@ -31,13 +35,43 @@ while True:
         
     # Fitur Menambah Buku
     elif pilihan == "2":
-        pass
-        break
+        print("*** Menambahkan Buku Baru ***")
+        judul = input("Masukan Judul Buku : ")
+        penulis = input("Nama Penulis : ")
+        stok = input("Masukan Jumlah stok Buku : ")
+
+        kodeBuku = penulis[0:3].upper()+ ''.join(random.choice(string.digits) for _ in range(3))
+        myBook = open("NFLibrary/buku.txt", 'a+')
+        myBook.write("\n"+kodeBuku +","+judul+","+penulis+","+stok)
+        myBook.close()
+        print("Penambahan buku baru dengan kode", kodeBuku, "dan judul" , judul)
+
 
     # Fitur Meminjam Buku
     elif pilihan == "3":
-        pass
-        break
+        print( " *** Peminjaman Buku *** ")
+        kode = input("Kode Buku : ")
+        f = open('NFLibrary/buku.txt')
+        for each_line in f:
+            data = each_line.strip()
+        if data[:6] == kode:
+            kodeAnggota = input("Masukan Kode Anggota : ")
+            fA = open('NFLibrary/anggota.txt')
+            for each_line in fA:
+                data = each_line.strip()
+            if data[:6] == kodeAnggota:
+                peminjam= open("NFLibrary/peminjaman.txt", 'a+')
+                peminjam.write("\n"+kode +","+kodeAnggota)
+                peminjam.close()
+                print("Peminjaman buku", kode, "oleh ",kodeAnggota," berhasil.")
+            else:
+                print("Kode Anggota tidak ditemukan. Peminjaman gagal.")
+            fA.close()
+        else:
+            print("Kode buku tidak ditemukan. Peminjaman gagal.")
+        f.close()
+
+        # break
 
     # Fitur Pengembalian Buku
     elif pilihan == "4":
@@ -67,3 +101,5 @@ while True:
     # Pilihan yang tidak ada
     else:
         print("Pilihan yang ada masukan tidak ada.")
+
+
